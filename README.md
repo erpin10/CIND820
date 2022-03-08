@@ -14,14 +14,15 @@ This repository contains the code required to evaluate the impact of select nurs
 # Table of Contents
 1. [Abstract](#abstract)
 2. [Requirements](#requirements)
-3. [Data Collection](#data-collection)
-4. [Data Cleansing](#data-cleansing)
-5. [Data Exploration and Preprocessing](#data-exploration-and-preprocessing)
-6. [Assumption Testing](#assumption-testing)
-7. [Model Building](#model-building)
-8. [Model Testing](#model-testing)
-9. [Model Evaluation and Validation](#model-evaluation-and-validation)
-10. [Results](#results)
+3. [Repository Content](#repository-content)
+4. [Data Collection](#data-collection)
+5. [Data Cleansing](#data-cleansing)
+6. [Data Exploration and Preprocessing](#data-exploration-and-preprocessing)
+7. [Assumption Testing](#assumption-testing)
+8. [Model Building](#model-building)
+9. [Model Testing](#model-testing)
+10. [Model Evaluation and Validation](#model-evaluation-and-validation)
+11. [Results](#results)
 
 # Abstract 
 ### Context
@@ -73,6 +74,13 @@ Required packages are as follows:
 
 XGBRFRegressor from the XGBoost package was used to conduct the Random Forest Regression with XGBoost.
 
+# Repository Content
+The repository content is as follows: 
+- The 'Constructed_Dataset' folder contains the dataset constructed from the data sources listed above. 
+- The 'Checkpoints' folder contains the checkpoints of the study to date. 
+- The 'Data_lifecycle' folder contains the various steps involved in the study. 
+- The 'Submission' folder contains the full Python notebook to date. 
+
 # Data Collection 
 ### Datasets
 Datasets were obtained from the CMS website at the following addresses for the year 2020 (as available): 
@@ -118,12 +126,6 @@ The following attributes were extracted from the above datasets as the independe
 
 The dependent variable for this study was also extracted from the CMS Claims Data Set: 
 - Adjusted Score (Number of outpatient emergency department visits per 1000 long-stay resident days)
-
-The 'Constructed_Dataset' folder contains the dataset constructed from the data sources listed above. 
-
-The 'Data_lifecycle' folder contains the various steps involved in the study. 
-
-The 'Submission' folder contains the full Python notebook to date. 
 
 # Data Cleansing 
 Attributes were validated, renamed and unnecessary columns removed. The dependent variable was renamed from Adjusted Score to 'Number of outpatient emergency department visits per 1000 long-stay resident days'. The dataset was checked for duplicates and null values. Any nursing homes with null values in their dependent variable were removed (2241 rows). 
