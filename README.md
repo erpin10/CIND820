@@ -296,12 +296,7 @@ Feature importances were extracted from the model using the feature_importances_
 
 ![rfxgb_featureimportance](https://user-images.githubusercontent.com/99699157/157059173-cd92a3be-a1d5-4b52-ba4c-e6bce66b9051.png)
 
-The feature importance score indicates how valuable each feature was in constructing the boosted decision tree in the final model. As can be seen above, the following attributes were the most useful in constructed the decision tree: 
-- Long-Stay QM Rating
-- Average Number of Residents Per Day
-- Percentage of low risk long-stay residents who lose control of their bowels or bladder
-- Total nursing staff turnover 
-- Adjusted RN Staffing Hours per Resident per Day
+The feature importance score indicates how valuable each feature was in constructing the boosted decision tree in the final model.
 
 # Results
 ### Stepwise Linear Regression
@@ -315,7 +310,14 @@ Based on this model, the attributes with the most effect include: <br>
 The model was generally accurate in its predictions based on the MAE and has good performance based on the RMSE, however is only able to explain 27% of variation based on the R^2. 
 
 ### Random Forest Regression with XG Boost 
+ The following attributes were the most useful in constructed the decision tree: 
+- Long-Stay QM Rating
+- Average Number of Residents Per Day
+- Percentage of low risk long-stay residents who lose control of their bowels or bladder
+- Total nursing staff turnover 
+- Adjusted RN Staffing Hours per Resident per Day
 
+The model was generally accurate in its predictions based on the MAE and has decent performance based on the RMSE, however is only able to explain 20% of the variation based on the R^2. 
 
 ## Evaluating Research Questions
 1. Which of the attributes affect outpatient emergency department visits from nursing homes for long-stay patients? 
