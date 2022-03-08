@@ -119,6 +119,8 @@ The following attributes were extracted from the above datasets as the independe
 The dependent variable for this study was also extracted from the CMS Claims Data Set: 
 - Adjusted Score (Number of outpatient emergency department visits per 1000 long-stay resident days)
 
+The Constructed_Dataset folder contains the dataset constructed from the data sources listed above. 
+
 # Data Cleansing 
 Attributes were validated, renamed and unnecessary columns removed. The dependent variable was renamed from Adjusted Score to 'Number of outpatient emergency department visits per 1000 long-stay resident days'. The dataset was checked for duplicates and null values. Any nursing homes with null values in their dependent variable were removed (2241 rows). 
 
