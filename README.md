@@ -141,7 +141,7 @@ Ownership Type and Long-Stay QM rating was then converted into dummy variables s
 ### Stepwise Linear Regression
 The null values for each attribute were checked and were deemed acceptable. Data descriptions and distributions were reviewed. On visual inspection, it was noted that a number of attributes were not normally distributed and that there were significant scaling differences between the attributes. 
 
-![Histograms](https://user-images.githubusercontent.com/99699157/157036341-606b4d0c-0438-4cf3-83b4-089a46dafbf5.png)
+![Histograms](./light.https://user-images.githubusercontent.com/99699157/157036341-606b4d0c-0438-4cf3-83b4-089a46dafbf5.png)
 
 Outliers were detected utilizing boxplots. To address skew, right-skewed attributes with a skew > 3 had their >90th percentile values replaced by the median and left-skewed attributes with a skew < 3 had their <10th percentile values replaced by the median. 
 
