@@ -49,6 +49,7 @@ The independent variables were chosen from the following quality domains to crea
 - Operational
 - Clinical
 - Safety
+
 Aside from facility ownership type, which is a categorical variable, the independent variables are numeric and continuous.
 The dependant variable, ‘Number of outpatient emergency department visits per 1000 long-stay resident days’, is from the CMS Medicare Claims Quality Measures dataset (Measure Code 552). It is a numeric, continuous variable that is calculated as a proportion of outpatient emergency department visits per 1000 long-stay resident days. 
 
