@@ -25,14 +25,14 @@ As of 2016, approximately 11% of the United States’ 85 years and older populat
 ### Problem Statement
 The initial research question for this study is as follows: 
 1.	Which measures within the following nursing home quality measure categories significantly affect the outpatient emergency department visit rate from nursing homes for long-stay patients?
-•	Nursing home ownership type <br>
-•	Bed numbers and occupancy rate <br>
-•	Staffing complement and turnover <br>
-•	Reported incidents, complaints and citations <br>
-•	Long-stay patient quality management rating <br>
-•	Inspection survey observed deficiencies <br>
-•	RAI-MDS 3.0 clinical quality measures <br>
-•	COVID-19 Incidence and Death Rate <br>
+- Nursing home ownership type
+- Bed numbers and occupancy rate
+- Staffing complement and turnover 
+- Reported incidents, complaints and citations 
+- Long-stay patient quality management rating 
+- Inspection survey observed deficiencies 
+- RAI-MDS 3.0 clinical quality measures 
+- COVID-19 Incidence and Death Rate 
 Additionally, this study will be exploring the use of machine learning for prediction within the domain of nursing home quality. Thus, this study has an addition research question as follows: 
 2.	Through utilization of machine learning techniques, is it possible to predict the outpatient emergency department rate for long-stay patients utilizing long-stay nursing home quality measures? 
 ### Data
@@ -41,18 +41,25 @@ Nursing home demographics and attributes are from:
 - The CMS MDS Quality Measures dataset
 - The CMS Medicare Survey Summary Measures dataset
 - The CMS COVID-19 dataset
+The independent variables were chosen from the following quality domains to create a holistic representation of nursing home quality status: 
+- Operational
+- Clinical
+- Safety
 Aside from facility ownership type, which is a categorical variable, the independent variables are numeric and continuous.
-The rate of outpatient emergency department visits is from the CMS Medicare Claims Quality Measures dataset (Measure Code 552). It is a numeric continuous variable that is calculated as a proportion of outpatient emergency department visits per 1000 long-stay resident days.
+The dependant variable, ‘Number of outpatient emergency department visits per 1000 long-stay resident days’, is from the CMS Medicare Claims Quality Measures dataset (Measure Code 552). It is a numeric, continuous variable that is calculated as a proportion of outpatient emergency department visits per 1000 long-stay resident days. 
+
 ### Techniques and Tools
-Python will be used across the lifecycle of this study including data preprocessing and exploration. Two approaches will be adopted:
-1. Random forest regression - will be used to build a model and make predictions. Chosen due to robustness of algorithm for potentially non-linear data and size of data set.
-2. Stepwise regression – will be used to build a model in Python. Chosen due to high number of features that may be highly correlated.
-If time permits, a neural network model may be implemented as well. Models will use an 80:20 train/test split to train, test and validate the model. In addition, the regression model will use k-fold cross-validation. 
+Python will be used across the lifecycle of this study. Three approaches will be adopted: 
+1.	Stepwise Linear Regression – will be used for model building and prediction. Chosen due to high number of features that may be highly correlated. 
+2.	Gradient Boosting (XGBoost) Regression - will be used for model building and prediction. Chosen due to robustness of algorithm for potentially semi-/non-parametric data.  
+3.	Kernel Ridge Regression – will be used for model building and prediction. Chosen due to potentially semi-parametric dataset requiring smoothing for improved performance. 
+
 ### Evaluation
 Model evaluation metrics will be:
-- Root Mean Square Error
-- Mean Absolute Error
-- R2
+- R2   
+- Mean Absolute Error (MAE)
+- Root Mean Square Error (RMSE)
+
 
 # Requirements
 
