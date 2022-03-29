@@ -4,7 +4,7 @@ CIND820: Big Data Analytics Project <br>
 Dr. Sedef Akinli Kocak <br>
 
 ## Repository Contents
-This repository contains the code required to evaluate the impact of select nursing home quality measures on the long-stay emergency department outpatient visit rate within the United States utilizing a Stepwise Linear Regression Model and a XG Boosted Random Forest Regression Model. 
+This repository contains the code required to evaluate the impact of select nursing home quality measures on the long-stay emergency department outpatient visit rate within the United States utilizing a Stepwise Linear Regression Model, a Gradient Boosted (XGBoost) Regression Model and a Kernel Ridge Regression Model. 
 
 ### Nursing Homes within the United States: 
 ![CMS_NH_Map](https://user-images.githubusercontent.com/99699157/156967715-5ac8c81f-924c-48b5-b8a9-e4f149dae4b6.png)<br>
@@ -21,19 +21,20 @@ This repository contains the code required to evaluate the impact of select nurs
 
 # Abstract 
 ### Context
-As of 2016, approximately 11% of the United States 85 years and older population live within nursing homes on a long-term basis, 69% of which have at least one disability that affects their quality of life – hearing, vision, cognitive, ambulation (Roberts et al., 2018). Frequent unplanned avoidable and unavoidable transfers from the nursing home to the emergency department can further negatively impact residents’ health status, can hinder care due to gaps in communication during transition, and can be costly for Medicaid programs (Moccia & Keyes, 2021; Walsh et al., 2010). Utilizing machine learning techniques, the relationship between operational, clinical and safety nursing home quality attributes and rate of emergency department visits for long-stay patients from the facility will be explored.
+As of 2016, approximately 11% of the United States’ 85 years and older population lives within nursing homes on a long-term basis, 69% of which have at least one disability that affects their quality of life – hearing, vision, cognitive, ambulation (Roberts et al., 2018). Frequent unplanned avoidable and unavoidable transfers from the nursing home to the emergency department can further negatively impact residents’ health status, can hinder care due to gaps in communication during transition, and can be costly for Medicaid programs (Moccia & Keyes, 2021; Walsh et al., 2010). Utilizing machine learning techniques, the relationship between nursing home quality measures in the clinic, operational and safety domains and the rate of outpatient emergency department visits for long-stay nursing home patients will be explored. 
 ### Problem Statement
-Research questions for this study are as follows:
-Which of the following attributes affect outpatient emergency department visits from nursing homes for long-stay patients? <br>
-- Nursing home facility ownership type (for-profit versus government-owned)<br>
-- Bed numbers and bed occupancy rate<br>
-- Adjusted staffing hours per day across all nursing disciplines and turnover rate<br>
-- Reported incidents: facility-reported incidents, substantiated complaints, infection control citations<br>
-- Long-stay patient quality rating<br>
-- Inspection survey outcomes on 2 domains: health deficiencies and fire safety<br>
-- MDS 3.0 clinical measures for long-stay patients<br>
-- COVID-19 incidence and death rates<br>
-Through utilization of machine learning techniques, is it possible to predict which of the above features impact return to outpatient emergency department incidence?
+The initial research question for this study is as follows: 
+1.	Which measures within the following nursing home quality measure categories significantly affect the outpatient emergency department visit rate from nursing homes for long-stay patients?
+•	Nursing home ownership type
+•	Bed numbers and occupancy rate
+•	Staffing complement and turnover  
+•	Reported incidents, complaints and citations
+•	Long-stay patient quality management rating
+•	Inspection survey observed deficiencies
+•	RAI-MDS 3.0 clinical quality measures
+•	COVID-19 Incidence and Death Rate
+Additionally, this study will be exploring the use of machine learning for prediction within the domain of nursing home quality. Thus, this study has an addition research question as follows: 
+2.	Through utilization of machine learning techniques, is it possible to predict the outpatient emergency department rate for long-stay patients utilizing long-stay nursing home quality measures? 
 ### Data
 Nursing home demographics and attributes are from:
 - The Centers for Medicare & Medicaid Services (CMS) Provider Information dataset
@@ -67,14 +68,11 @@ Required packages are as follows:
 - Scipy.stats
 - XGBoost
 
-XGBRFRegressor from the XGBoost package was used to conduct the Random Forest Regression with XGBoost.
 
 # Repository Content
 The repository content is as follows: 
 - The 'Constructed_Dataset' folder contains the dataset constructed from the data sources listed above. 
-- The 'Checkpoints' folder contains the checkpoints of the study to date. 
-- The 'Data_lifecycle' folder contains the various steps involved in the study. 
-- The 'Submission' folder contains the full Python notebook to date. 
+- The 'Checkpoints' folder contains the checkpoints of the study to date. Each model has one Python notebook checkpoint. 
 
 # Data Preparation 
 ### Datasets
@@ -138,6 +136,15 @@ The following 3 models were built and evaluated:
 | R^2  | 0.138 | 0.262 | 0.305 |
 | Training time  | 0.005s | 0.07s | 4.35s | 
 | Prediction time | 0.001s | 0.003s | 0.23s |
+
+The attributes with the most information gain in relation to the dependent variable are as follows: 
+ Model  | Gradient Boosted (XG Boost) Regression | Kernel Ridge Regression |
+| ------------- | ------------- | ------------- | ------------- |
+| 1  | Long-Stay QM Rating (33.0)  | Total nursing staff turnover (0.908) | 
+| 2  | Average Number of Residents per Day (31.0) | Percentage of long-stay residents whose need for help with daily activities has increased (0.100) | 
+| 3 | Percentage of long-stay residents whose ability to move independently worsened (28.0) | Long-Stay QM Rating (0.084) | 
+| 4  | Percentage of long-stay residents whose need for help with daily activities has increased (27.0) | Percentage of long-stay residents who were physically restrained (0.045) | 
+
 
 # Study Conclusions
 This study explored the relationship between which nursing home measures significantly affected the long-stay patient outpatient ED Visit rate and attempted to predict the ED Visit rate for long-stay patients based on the quality measures. Three models were built using Stepwise Regression, Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression. The models were able to identify relationships between nursing home measures and outpatient ED Visit rate however a significant relationship was not established. The selected nursing home quality measures had 13% - 30% ability to predict the ED Visit rate, demonstrating that nursing home quality measures are not able to fully describe the ED Visit rate by itself. The Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression models outperformed the Stepwise Regression model by a significant margin and were able to provide better predictive performance due to the model approaches to semi-parametric (or skewed data). 
