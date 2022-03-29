@@ -137,6 +137,8 @@ The dataset from the 'Constructed_Dataset' folder may be used at this point for 
 
 # Methodology 
 The study methdology was as follows: 
+| Step | Description |
+| ------------- | ------------- |
 | PROBLEM AND OBJECTIVE DEFINITION | Identify business context, define problem and related objectives. |
 | DATA PREPARATION | Identify data sources and gather datasets in similar time periods.  Merge data sources and prepare data set for exploration. |
 | DATA PREPROCESSING & EXPLORATION | Data cleaning (duplication elimination, missing value detection, error detection, outlier detection), transformation and normalization, descriptive statistics, univariate distribution analysis, bivariate correlation analysis (if required). |
