@@ -25,14 +25,14 @@ As of 2016, approximately 11% of the United States’ 85 years and older populat
 ### Problem Statement
 The initial research question for this study is as follows: 
 1.	Which measures within the following nursing home quality measure categories significantly affect the outpatient emergency department visit rate from nursing homes for long-stay patients?
-•	Nursing home ownership type
-•	Bed numbers and occupancy rate
-•	Staffing complement and turnover  
-•	Reported incidents, complaints and citations
-•	Long-stay patient quality management rating
-•	Inspection survey observed deficiencies
-•	RAI-MDS 3.0 clinical quality measures
-•	COVID-19 Incidence and Death Rate
+•	Nursing home ownership type <br>
+•	Bed numbers and occupancy rate <br>
+•	Staffing complement and turnover <br>
+•	Reported incidents, complaints and citations <br>
+•	Long-stay patient quality management rating <br>
+•	Inspection survey observed deficiencies <br>
+•	RAI-MDS 3.0 clinical quality measures <br>
+•	COVID-19 Incidence and Death Rate <br>
 Additionally, this study will be exploring the use of machine learning for prediction within the domain of nursing home quality. Thus, this study has an addition research question as follows: 
 2.	Through utilization of machine learning techniques, is it possible to predict the outpatient emergency department rate for long-stay patients utilizing long-stay nursing home quality measures? 
 ### Data
