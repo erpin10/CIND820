@@ -4,7 +4,7 @@ CIND820: Big Data Analytics Project <br>
 Dr. Sedef Akinli Kocak <br>
 
 ## Repository Contents
-This repository contains the code required to evaluate the impact of select nursing home quality measures on the long-stay emergency department outpatient visit rate within the United States utilizing a Stepwise Linear Regression Model, a Gradient Boosted (XGBoost) Regression Model and a Kernel Ridge Regression Model. 
+This repository contains the code required to evaluate the impact of select nursing home quality measures on the long-stay emergency department outpatient visit rate within the United States utilizing a Stepwise Linear Regression Model, a Gradient Boosted (XGBoost) Regression Model, and a Kernel Ridge Regression Model. 
 
 ### Nursing Homes within the United States: 
 ![CMS_NH_Map](https://user-images.githubusercontent.com/99699157/156967715-5ac8c81f-924c-48b5-b8a9-e4f149dae4b6.png)<br>
