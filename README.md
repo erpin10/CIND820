@@ -138,7 +138,7 @@ The following 3 models were built and evaluated:
 | Prediction time | 0.001s | 0.003s | 0.23s |
 
 The attributes with the most information gain in relation to the dependent variable are as follows: 
- Model  | Gradient Boosted (XG Boost) Regression | Kernel Ridge Regression |
+| Model  | Gradient Boosted (XG Boost) Regression | Kernel Ridge Regression |
 | ------------- | ------------- | ------------- | ------------- |
 | 1  | Long-Stay QM Rating (33.0)  | Total nursing staff turnover (0.908) | 
 | 2  | Average Number of Residents per Day (31.0) | Percentage of long-stay residents whose need for help with daily activities has increased (0.100) | 
