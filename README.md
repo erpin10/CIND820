@@ -15,14 +15,8 @@ This repository contains the code required to evaluate the impact of select nurs
 1. [Abstract](#abstract)
 2. [Requirements](#requirements)
 3. [Repository Content](#repository-content)
-4. [Data Collection](#data-collection)
-5. [Data Cleansing](#data-cleansing)
-6. [Data Exploration and Preprocessing](#data-exploration-and-preprocessing)
-7. [Assumption Testing](#assumption-testing)
-8. [Model Building](#model-building)
-9. [Model Testing](#model-testing)
-10. [Model Evaluation and Validation](#model-evaluation-and-validation)
-11. [Results](#results)
+4. [Data Preparation](#data-preparation)
+5. [Results](#results)
 
 # Abstract 
 ### Context
@@ -81,7 +75,7 @@ The repository content is as follows:
 - The 'Data_lifecycle' folder contains the various steps involved in the study. 
 - The 'Submission' folder contains the full Python notebook to date. 
 
-# Data Collection 
+# Data Preparation 
 ### Datasets
 Datasets were obtained from the CMS website at the following addresses for the year 2020 (as available): 
 - CMS Medicare Claims Quality Measures: https://data.cms.gov/provider-data/dataset/ijh5-nb2v
@@ -129,198 +123,24 @@ The dependent variable for this study was also extracted from the CMS Claims Dat
 
 The dataset from the 'Constructed_Dataset' folder may be used at this point for the next stages of the study. 
 
-# Data Cleansing 
-Attributes were validated, renamed and unnecessary columns removed. The dependent variable was renamed from Adjusted Score to 'Number of outpatient emergency department visits per 1000 long-stay resident days'. The dataset was checked for duplicates and null values. Any nursing homes with null values in their dependent variable were removed (2241 rows). 
-
-The categorical Ownership Type attribute was coded into three groups: 
-- Non profit: 0
-- For profit: 1
-- Government: 2
-
-Ownership Type and Long-Stay QM rating was then converted into dummy variables solely for the Linear Regression model.
-
-## Data Exploration and Preprocessing 
-### Stepwise Linear Regression
-The null values for each attribute were checked and were deemed acceptable. Data descriptions and distributions were reviewed. On visual inspection, it was noted that a number of attributes were not normally distributed and that there were significant scaling differences between the attributes. 
-
-![Histograms](https://user-images.githubusercontent.com/99699157/157036341-606b4d0c-0438-4cf3-83b4-089a46dafbf5.png)
-
-Outliers were detected utilizing boxplots. To address skew, right-skewed attributes with a skew > 3 had their >90th percentile values replaced by the median and left-skewed attributes with a skew < 3 had their <10th percentile values replaced by the median. 
-
-The dataset was then normalized to (0,1) using the min-max method to address scaling issues.
-
-### Random Forest Regression with XG Boost
-The null values for each attribute were checked and were deemed acceptable. Data descriptions and distributions were reviewed.
-
-# Assumption Testing
-### Stepwise Linear Regression
-#### Normality of Predictor Distributions 
-Skewed and non-normal attributes were log transformed using numpy: 
-
-![Histograms_Trans](https://user-images.githubusercontent.com/99699157/157059507-227eb4e5-7fb8-476c-9377-237effab5997.png)
-
-On visual inspection, distributions remained non-normal for the majority of the attributes. 
-
-#### Linearity 
-
-Scatterplots were created to visualize the relationship between the independent variables against the dependent variable. Linearity did not exist for any attribute against the dependent variable. Pearson's R coefficient was used to cross-check  and showed a lack of linearity between each individual independent variable and the dependent variable as well. 
-
-#### Multicollinearity
-Correlations were assessed and a heatmap created: 
-
-![Heatmap](https://user-images.githubusercontent.com/99699157/157040117-5cf96c46-3fd9-4aca-9208-190a4704ab89.png)
-Most attributes were not correlated or weakly correlated. Number of Certified Beds and Average Number of Residents per Day were the only attributes that were strongly correlated > 0.9. Additionally, the dummy variables of Ownership Type and Long-Stay QM wee highly correlated within themselves. Registered Nurse turnover and Total nursing staff turnover, COVID-19 deaths per occupied beds and confirmed COVID-19 cases per occupied beds, and Percentage of long-stay residents whose need for help with daily activities has increased and Percentage of long-stay residents whose ability to move independently worsened were moderately correlated at 0.67, 0.64 and 0.57 respectively.
-This was confirmed through VIF testing. 'Number of Certified Beds', 'Ownership Type 2' and 'Long STay QM Rating 5.0' were dropped from the dataset to maintain a VIF <5. 
-
-#### Normality of Error Terms 
-Visual analysis of a histogram and Q-Q plot of the error terms showed a significant non-normal distribution, which was confirmed using teh Jarque-Bera test (statistic=13859.860932864438, pvalue=0.0). 
-
-#### Autocorrelation of the Error Terms 
-The Durbin-Watson test was used to test autocorrleation of the residuals. The result (1.906673615916626) showed little to no autocorrelation of the residuals in teh model, demonstrating that the errors are independent within the model. 
-
-#### Homoscedasticity 
-The Het-Breuschpagan test was used to test for homoscedastcity. Based on the Lagrange multiplier statistic (403.99785553969406) and the p-value (2.114487020436578e-65), heteroscedasticity is present within the model. Thus, the residuals are not distributed with equal variance meaning that the results of the regression analysis may not be reliable. To address this, the dependent variable was log transformed and the Het-Breushpagan test was redone. However, heteroscedastcity continued to be present within the model after log transformation of the dependent variable. 
-
-#### Linear Regression Assumping Testing Summary 
-    - Normality of predictor distributions: Failed
-    - Linearity of independent and dependant variables: Failed
-    - Mullicolinearity: Passed 
-    - Normality of error terms: Failed 
-    - Autocorrelation of error terms: Passed 
-    - Homoscedasticity: Failed 
-The results of assumption testing show that linear regression may not be the ideal test to use for this dataset. Regardless, linear regression will be conducted on the data and the effect of the failed assumptions will be considered in context of the performance of the model.
-
-### Random Forest Regression with XG Boost
-Random forest regression with XG Boost has no assumptions for testing. 
-
-# Model building 
-### Stepwise Linear Regression
-A stepwise regression analysis with an alpha = 0.05 was chosen to be performed for this study. The following observations were noted from the original model prior to beginning stepwise regression: 
-- R^2 = 0.294, which remains relatively low 
-- F-value is statistically significant
-- There are multiple measures with a p-value > 0.05
-- The statsmodel regression notes state that there is potentially strong multicollinearity in model due to the condition number. 
-
-The following attributes were removed during the stepwise regression process based on a p-value > 0.05. 
-- Percentage of long-stay residents who lose too much weight
-- Number of Citations from Infection Control Inspections
-- Total Number of Health Deficiencies
-- COVID-19 Deaths Per Occupied Beds
-- Percentage of long-stay residents experiencing one or more falls with major injury
-- Percentage of long-stay residents who were physically restrained
-- Adjusted Nurse Aide Staffing Hours per Resident per Day
-- Confirmed COVID-19 Cases Per Occupied Beds
-- Registered Nurse turnover
-- Ownership Type_1
-- Percentage of long-stay residents assessed and appropriately given the seasonal influenza vaccine
-- Percentage of long-stay residents who have depressive symptoms
-- Number of Facility Reported Incidents
-- Total Number of Fire Safety Deficiencies
-
-The remaining attributes had a p-value < 0.05: 
-- Average Number of Residents per Day
-- Total nursing staff turnover
-- Adjusted LPN Staffing Hours per Resident per Day
-- Adjusted RN Staffing Hours per Resident per Day
-- Number of Substantiated Complaints
-- Percentage of high risk long-stay residents with pressure ulcers
-- Percentage of long-stay residents assessed and appropriately given the pneumococcal vaccine
-- Percentage of long-stay residents who received an antianxiety or hypnotic medication
-- Percentage of long-stay residents who received an antipsychotic medication
-- Percentage of long-stay residents whose ability to move independently worsened
-- Percentage of long-stay residents whose need for help with daily activities has increased
-- Percentage of long-stay residents with a catheter inserted and left in their bladder
-- Percentage of long-stay residents with a urinary tract infection
-- Percentage of low risk long-stay residents who lose control of their bowels or bladder
-- Ownership Type_0
-- Long-Stay QM Rating_1.0
-- Long-Stay QM Rating_2.0
-- Long-Stay QM Rating_3.0
-- Long-Stay QM Rating_4.0
-
-The final model has 16 attributes, with an R^2 of 0.293 or 29.3% of explainability. The F-Statistic remains signficant. See below for statsmodel summary: 
-
-![Final_Model_Summary](https://user-images.githubusercontent.com/99699157/157049424-3ba69e65-3ac3-4ec8-b415-d399d8141cfe.png)
-
-The resulting model was split into an 80:20 train/test split then fit to a linear regression model (OLS). 
-
-### Random Forest Regression with XG Boost
-
-The 'Federal Provider Number' and 'Provider Name' attributes were dropped and the model was defined, then into an 80:20 train/test split. Initial hyperparamaters were set as follows: 
-- n_estimators=100
-- Colsample_bynode=0.2 
-
-Repeated 10-fold cross-validation with 3 repeats was then used to build the model using XGBRFRegressor from the xgboost package. 
-
-# Model Testing
-### Stepwise Linear Regression
-The stepwise linear regression model was used to predict the dependent values, compared against the actual testing set then plotted below: 
-
-![slr_predictions](https://user-images.githubusercontent.com/99699157/157053742-2dd78bcc-f2ae-4e7c-bc79-eb8dc5c00b62.png)
-
-### Random Forest Regression with XG Boost 
-Mean Absolute Error (MAE), Root Mean Squared Error (RMSE) and R^2 were used to evaluate the initial model. Hyperparamater tuning was completed based on: 
-- Number of trees (n_estimators) at 100, 250, 500, 750, 1000
-- Number of features (colsample_bynode) at 0.1, 0.2, 0.4 
-
-n_estimators = 750 was observed to improve MAE, RMSE and R^2 performance. 
-
-colsample_bynode = 0.1 was observed to improve MAE and RMSE, however R^2 performance was noted to increase with an increased number of features. However, 0.1 was retained to preserve a more desirable MAE/RMSE. 
-
-The model was redefined using n_estimator = 750 and retaining colsample_bynode = 0.1 then fit. 
-
-The xgboosted random forest regression model was then used to predict the dependent values, compared against the actual testing set then plotted below: 
-
-![rfxgb_predictions](https://user-images.githubusercontent.com/99699157/157058645-93426de8-d33e-4325-acfe-8ba0e244cbbf.png)
-
-# Model Evaluation and Validation 
-### Stepwise Linear Regression
-Mean Absolute Error (MAE), Root Mean Squared Error (RMSE) and R^2 were used to evaluate the model. For this model, the evaluation metric values were as follows: 
-- MAE: 0.04526530738707251
-- R^2: 0.27676391504288367
-- RMSE: 0.0036011681359969148
-
-Mean Absolute Error measures the accuracy of the model. A MAE of 0.045 signifies that the model is generally accurate, and closely able to predict the actual values. <br>
-R^2 measures the amount of variation that can be explained by the model and currently is at 27%, which means that only 27% of model predictions are correct. <br>
-The Root Mean Squared Error shows the spread of the residual errors. A value of 0.003 shows that the model has good performance. <br>
-
-### Random Forest Regression with XG Boost 
-Mean Absolute Error (MAE), Root Mean Squared Error (RMSE) and R^2 were used to evaluate the model. For this model, the evaluation metric values were as follows: 
-MAE 0.2996527688997647
-R^2 0.20373157176230627
-RMSE 0.16406031743342978
-
-Mean Absolute Error measures the accuracy of the model. A MAE of 0.3 signifies that the model is generally accurate, and able to predict actual values. <br>
-R^2 measures the amount of variation that can be explained by the model and currently is at 20%, which means that only 20% of model predictions are correct. <br>
-The Root Mean Squared Error shows the spread of the residual errors. A value of 0.16 shows that the model has decent performance. <br>
-
-Feature importances were extracted from the model using the feature_importances_ function of xgboost. This was plotted below: 
-
-![rfxgb_featureimportance](https://user-images.githubusercontent.com/99699157/157059173-cd92a3be-a1d5-4b52-ba4c-e6bce66b9051.png)
-
-The feature importance score indicates how valuable each feature was in constructing the boosted decision tree in the final model.
-
 # Results
-### Stepwise Linear Regression
+The following 3 models were built and evaluated: 
+•	Stepwise Linear Regression
+•	Gradient Boosted (XG Boost) Regression 
+•	Kernel Ridge Regression 
 
-Based on this model, the attributes with the most effect include: <br>
-- Average Residents per Day: With a unit increase in Average Residents per Day, there is a -0.144 decrease in the Emergency Department Visit Rate. <br>
-- Long-Stay QM Rating (1.0): With a unit increase in the 1/5 (or lowest) Long-Stay QM Rating, there is an increase in the Emergency Department Visit Rate. <br>
-- Percentage of long-stay residents whose need for help with daily activities has increase: With a unit increase in the percentage of long-stay residents who need additional help, there is a -0.1155 decrease in Emergency Dpeartment Visit Rate.<br>
-- Percentage of long-stay resident who received an antipsychotic medication: With a unit increase in the percentage of patients receiving a anti-psychotic medication, there is a -0.1043 decrease in the Emergency Department Visit rate. <br>
+Summary performance measures for each model is as follows: 
+| Model  | Stepwise Linear Regression | Gradient Boosted (XG Boost) Regression | Kernel Ridge Regression |
+| ------------- | ------------- | ------------- | ------------- |
+| Mean Absolute Error  | 0.05  | 0.05 | 0.05 |
+| Root Mean Squared Error  | 0.004 | 0.005 | 0.005 | 
+| R^2  | 0.138 | 0.262 | 0.305 |
+| Training time  | 0.005s | 0.07s | 4.35s | 
+| Prediction time | 0.001s | 0.003s | 0.23s |
 
-The model was generally accurate in its predictions based on the MAE and has good performance based on the RMSE, however is only able to explain 27% of variation based on the R^2. 
+## Conclusion
+This study explored the relationship between which nursing home measures significantly affected the long-stay patient outpatient ED Visit rate and attempted to predict the ED Visit rate for long-stay patients based on the quality measures. Three models were built using Stepwise Regression, Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression. The models were able to identify relationships between nursing home measures and outpatient ED Visit rate however a significant relationship was not established. The selected nursing home quality measures had 13% - 30% ability to predict the ED Visit rate, demonstrating that nursing home quality measures are not able to fully describe the ED Visit rate by itself. The Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression models outperformed the Stepwise Regression model by a significant margin and were able to provide better predictive performance due to the model approaches to semi-parametric (or skewed data). 
 
-### Random Forest Regression with XG Boost 
- The following attributes were the most useful in constructed the decision tree: 
-- Long-Stay QM Rating
-- Average Number of Residents Per Day
-- Percentage of low risk long-stay residents who lose control of their bowels or bladder
-- Total nursing staff turnover 
-- Adjusted RN Staffing Hours per Resident per Day
+This study contributes to the body of knowledge regarding the impact of quality measures in the clinical, operational and safety domains on the outpatient ED Visit rate for long-stay patients within the nursing home environment. It identified that, while individual quality measures may contribute in part to the overall outpatient ED Visit rate for long-stay patients, there are many factors outside the realm of quality that predict ED Visit rate. However, this study was able to isolate a few quality-focused attributes such as ‘Long-Stay QM Rating’ and ‘Total Nursing Staff turnover’ that may have some impact on predicting the outpatient ED Visit rate within nursing homes that could be used in more comprehensive studies within this space. Additionally, a potential relationship between mobility and ED Visit rate was postulated, however additional research may be required. Clinical and operational quality measures were found to have a greater impact on predictive performance than safety measures. 
 
-The model was generally accurate in its predictions based on the MAE and has decent performance based on the RMSE, however is only able to explain 20% of the variation based on the R^2. 
-
-## Evaluating Research Questions
-1. Which of the attributes affect outpatient emergency department visits from nursing homes for long-stay patients? 
-2. Is it possible to predict which of the above features impact return to outpatient emergency department incidence?
+Further studies within this area can focus on exploring the relationship between clinical measures focused on mobility, ADLs and falls. Studies can additionally explore the relationship between aggregate quality measures and their predictive performance in relation to the ED Visit rate.
