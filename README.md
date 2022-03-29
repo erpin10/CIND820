@@ -17,6 +17,7 @@ This repository contains the code required to evaluate the impact of select nurs
 3. [Repository Content](#repository-content)
 4. [Data Preparation](#data-preparation)
 5. [Results](#results)
+6. [Study Conclusions](#study-conclusions)
 
 # Abstract 
 ### Context
@@ -129,7 +130,7 @@ The following 3 models were built and evaluated:
 •	Gradient Boosted (XG Boost) Regression 
 •	Kernel Ridge Regression 
 
-Summary performance measures for each model is as follows: 
+<b>Summary performance measures for each model is as follows: </b>
 | Model  | Stepwise Linear Regression | Gradient Boosted (XG Boost) Regression | Kernel Ridge Regression |
 | ------------- | ------------- | ------------- | ------------- |
 | Mean Absolute Error  | 0.05  | 0.05 | 0.05 |
@@ -138,7 +139,7 @@ Summary performance measures for each model is as follows:
 | Training time  | 0.005s | 0.07s | 4.35s | 
 | Prediction time | 0.001s | 0.003s | 0.23s |
 
-## Conclusion
+# Study Conclusions
 This study explored the relationship between which nursing home measures significantly affected the long-stay patient outpatient ED Visit rate and attempted to predict the ED Visit rate for long-stay patients based on the quality measures. Three models were built using Stepwise Regression, Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression. The models were able to identify relationships between nursing home measures and outpatient ED Visit rate however a significant relationship was not established. The selected nursing home quality measures had 13% - 30% ability to predict the ED Visit rate, demonstrating that nursing home quality measures are not able to fully describe the ED Visit rate by itself. The Gradient Boosted (XG Boost) Regression and Kernel Ridge Regression models outperformed the Stepwise Regression model by a significant margin and were able to provide better predictive performance due to the model approaches to semi-parametric (or skewed data). 
 
 This study contributes to the body of knowledge regarding the impact of quality measures in the clinical, operational and safety domains on the outpatient ED Visit rate for long-stay patients within the nursing home environment. It identified that, while individual quality measures may contribute in part to the overall outpatient ED Visit rate for long-stay patients, there are many factors outside the realm of quality that predict ED Visit rate. However, this study was able to isolate a few quality-focused attributes such as ‘Long-Stay QM Rating’ and ‘Total Nursing Staff turnover’ that may have some impact on predicting the outpatient ED Visit rate within nursing homes that could be used in more comprehensive studies within this space. Additionally, a potential relationship between mobility and ED Visit rate was postulated, however additional research may be required. Clinical and operational quality measures were found to have a greater impact on predictive performance than safety measures. 
