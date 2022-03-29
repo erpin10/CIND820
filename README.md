@@ -34,7 +34,8 @@ The initial research question for this study is as follows:
 - RAI-MDS 3.0 clinical quality measures 
 - COVID-19 Incidence and Death Rate <br>
 
-Additionally, this study will be exploring the use of machine learning for prediction within the domain of nursing home quality. Thus, this study has an addition research question as follows: 
+Additionally, this study will be exploring the use of machine learning for prediction within the domain of nursing home quality. Thus, this study has an addition research question as follows: <br>
+
 2.	Through utilization of machine learning techniques, is it possible to predict the outpatient emergency department rate for long-stay patients utilizing long-stay nursing home quality measures? 
 ### Data
 Nursing home demographics and attributes are from:
