@@ -45,6 +45,7 @@ Nursing home demographics and attributes are from:
 - The CMS COVID-19 dataset
 <br>
 The independent variables were chosen from the following quality domains to create a holistic representation of nursing home quality status: <br>
+
 - Operational
 - Clinical
 - Safety
