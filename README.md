@@ -16,8 +16,9 @@ This repository contains the code required to evaluate the impact of select nurs
 2. [Requirements](#requirements)
 3. [Repository Content](#repository-content)
 4. [Data Preparation](#data-preparation)
-5. [Results](#results)
-6. [Study Conclusions](#study-conclusions)
+5. [Methodology](#methodology) 
+6. [Results](#results)
+7. [Study Conclusions](#study-conclusions)
 
 # Abstract 
 ### Context
@@ -133,6 +134,16 @@ The dependent variable for this study was also extracted from the CMS Claims Dat
 - Adjusted Score (Number of outpatient emergency department visits per 1000 long-stay resident days)
 
 The dataset from the 'Constructed_Dataset' folder may be used at this point for the next stages of the study. 
+
+# Methodology 
+The study methdology was as follows: 
+| PROBLEM AND OBJECTIVE DEFINITION | Identify business context, define problem and related objectives. |
+| DATA PREPARATION | Identify data sources and gather datasets in similar time periods.  Merge data sources and prepare data set for exploration. |
+| DATA PREPROCESSING & EXPLORATION | Data cleaning (duplication elimination, missing value detection, error detection, outlier detection), transformation and normalization, descriptive statistics, univariate distribution analysis, bivariate correlation analysis (if required). |
+| MODEL BUILDING & TESTING | Assumption testing for linear regression (Normality, linearity of IV-DV relationship, multicollinearity, homoscedasticity, autocorrelation, normal distribution of errors (Q-Q plots)), dimension reduction (as required), hyperparameter tuning, model fitting. |
+| ANALYSIS | Split model into training and testing sets, conduct predictive analysis. |
+| RESULTS & VALIDATION | Present results for all models include measures of model effectiveness, efficiency and stability. |
+| INTERPRET & COMMUNICATE | Interpret results against evaluation metrics and present findings (report, presentation etc.). |
 
 # Results
 The following 3 models were built and evaluated: 
